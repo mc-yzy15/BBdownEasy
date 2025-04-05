@@ -4,36 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIdownEasy - 次世代B站下载工具</title>
+    <title>BBdownEasy - 次世代B站下载工具</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="particles"></canvas>
     
     <header class="cyber-header">
-        <h1 class="neon-text">BIdown<span class="blink">Easy</span></h1>
+        <h1 class="neon-text">BBdown<span class="blink">Easy</span></h1>
         <p class="subtitle">基于BBDown的次世代下载解决方案</p>
     </header>
 
     <div class="cyber-container">
         <section class="cyber-card" data-aos="zoom-in">
-            <h2><span class="hacker-text">#</span> 项目亮点</h2>
+            <h2><span class="hacker-text">#</span> 项目简介</h2>
             <div class="grid-container">
                 <div class="cyber-box">
                     <div class="hexagon"></div>
-                    <h3>智能安装</h3>
-                    <p>全自动环境配置</p>
+                    <h3>核心功能</h3>
+                    <ul class="cyber-list">
+                        <li>自动检测安装BBDown</li>
+                        <li>图形化交互界面</li>
+                        <li>多线程下载支持</li>
+                        <li>自动版本更新</li>
+                    </ul>
                     <div class="glow"></div>
                 </div>
-                <!-- 更多功能方块... -->
             </div>
         </section>
 
         <section class="cyber-card hologram" data-aos="fade-up">
-            <h2><span class="hacker-text">></span> 快速开始</h2>
+            <h2><span class="hacker-text">></span> 功能特性</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3 class="feature-title">自动安装与更新</h3>
+                    <div class="feature-content">
+                        <p>首次运行时自动检测环境</p>
+                        <p>通过Chocolatey自动安装:</p>
+                        <ul>
+                            <li>BBDown下载器</li>
+                            <li>FFmpeg编码器</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h3 class="feature-title">交互式下载界面</h3>
+                    <div class="feature-content">
+                        <p>提供两种操作模式:</p>
+                        <ul>
+                            <li>快速下载模式</li>
+                            <li>高级下载模式</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cyber-card" data-aos="zoom-in">
+            <h2><span class="hacker-text">$</span> 使用说明</h2>
             <div class="code-container">
-                <pre class="neon-code"><code class="language-bat">bbdowneasy.bat "https://www.bilibili.com/video/BV1xx..."</code></pre>
+                <pre class="neon-code"><code class="language-bat">:: 安装步骤
+bbdownInstall.bat
+:: 运行方式
+bdown.bat</code></pre>
                 <div class="scanline"></div>
+            </div>
+            <div class="install-steps">
+                <h3>安装步骤</h3>
+                <ol>
+                    <li>双击运行 <code>bbdownInstall.bat</code></li>
+                    <li>系统将自动完成环境配置</li>
+                </ol>
             </div>
         </section>
     </div>
@@ -45,7 +86,7 @@
                 <span class="yellow"></span>
                 <span class="green"></span>
             </div>
-            <span class="terminal-title">BIdownEasy@v1.6.3 ~</span>
+            <span class="terminal-title">BBdownEasy@v1.0.0 ~</span>
         </div>
         <div class="terminal-content" id="terminal"></div>
     </div>
