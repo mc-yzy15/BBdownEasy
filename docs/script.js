@@ -102,3 +102,41 @@ document.addEventListener('DOMContentLoaded', function() {
         canvas.height = window.innerHeight;
     });
 });
+
+// 在文件末尾添加以下代码
+
+// 链接悬停效果
+document.querySelectorAll('.cyber-link').forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+        this.querySelector('.link-glow').style.opacity = '1';
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        this.style.transform = '';
+        this.querySelector('.link-glow').style.opacity = '0';
+    });
+});
+
+// 获取最新版本号并显示
+async function fetchLatestVersion() {
+    try {
+        const response = await fetch('https://api.github.com/repos/Yzy15/BBdownEasy/releases/latest');
+        const data = await response.json();
+        const version = data.tag_name;
+        
+        // 更新终端标题
+        document.querySelector('.terminal-title').textContent = `BIdownEasy@${version} ~`;
+        
+        // 在终端显示版本信息
+        setTimeout(() => {
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML += `<div>最新版本: ${version}</div>`;
+            terminal.scrollTop = terminal.scrollHeight;
+        }, 4000);
+    } catch (error) {
+        console.error('获取版本信息失败:', error);
+    }
+}
+
+fetchLatestVersion();
