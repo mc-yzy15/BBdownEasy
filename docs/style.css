@@ -1,0 +1,86 @@
+/* style.css */
+:root {
+    --neon-blue: #00f3ff;
+    --neon-purple: #bc13fe;
+    --dark-bg: #0a0a14;
+}
+
+body {
+    background: var(--dark-bg);
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+}
+
+.cyber-header {
+    text-align: center;
+    padding: 5rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+.neon-text {
+    font-size: 4rem;
+    text-shadow: 0 0 10px var(--neon-blue),
+                 0 0 20px var(--neon-blue),
+                 0 0 30px var(--neon-blue);
+    animation: neon-pulse 1.5s infinite alternate;
+}
+
+@keyframes neon-pulse {
+    from { text-shadow: 0 0 10px var(--neon-blue); }
+    to { text-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-purple); }
+}
+
+.cyber-card {
+    background: rgba(10, 10, 30, 0.9);
+    border: 2px solid var(--neon-blue);
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s;
+}
+
+.cyber-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px var(--neon-blue);
+}
+
+.neon-code {
+    background: #000;
+    padding: 1.5rem;
+    border: 1px solid var(--neon-purple);
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.scanline {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(to right, 
+        transparent 0%, 
+        var(--neon-blue) 50%, 
+        transparent 100%);
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { top: 0; opacity: 0; }
+    50% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+.cyber-terminal {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--neon-purple);
+    width: 70%;
+    margin: 3rem auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--neon-purple);
+}
+
+/* 更多动画效果... */
