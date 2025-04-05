@@ -12,22 +12,32 @@
     
     <header class="cyber-header">
         <h1 class="neon-text">BBdown<span class="blink">Easy</span></h1>
-        <p class="subtitle">基于BBDown的次世代下载解决方案</p>
+        <p class="subtitle">基于BBDown的次世代B站下载解决方案</p>
     </header>
 
-    <!-- 在cyber-container闭合div后添加以下内容 -->
     <div class="cyber-container">
         <section class="cyber-card" data-aos="zoom-in">
-            <h2><span class="hacker-text">#</span> 项目简介</h2>
+            <h2><span class="hacker-text">#</span> 核心功能</h2>
             <div class="grid-container">
                 <div class="cyber-box">
                     <div class="hexagon"></div>
-                    <h3>核心功能</h3>
+                    <h3>智能下载</h3>
                     <ul class="cyber-list">
-                        <li>自动检测安装BBDown</li>
-                        <li>图形化交互界面</li>
-                        <li>多线程下载支持</li>
-                        <li>自动版本更新</li>
+                        <li>自动检测并安装BBDown</li>
+                        <li>多线程高速下载</li>
+                        <li>智能画质选择</li>
+                        <li>自动更新检查</li>
+                    </ul>
+                    <div class="glow"></div>
+                </div>
+                <div class="cyber-box">
+                    <div class="hexagon"></div>
+                    <h3>全面支持</h3>
+                    <ul class="cyber-list">
+                        <li>支持WEB/TV/APP/国际版API</li>
+                        <li>弹幕/封面/字幕下载</li>
+                        <li>会员专属内容下载</li>
+                        <li>多账号登录管理</li>
                     </ul>
                     <div class="glow"></div>
                 </div>
@@ -35,26 +45,27 @@
         </section>
 
         <section class="cyber-card hologram" data-aos="fade-up">
-            <h2><span class="hacker-text">></span> 功能特性</h2>
+            <h2><span class="hacker-text">></span> 使用模式</h2>
             <div class="feature-grid">
                 <div class="feature-item">
-                    <h3 class="feature-title">自动安装与更新</h3>
+                    <h3 class="feature-title">快速模式</h3>
                     <div class="feature-content">
-                        <p>首次运行时自动检测环境</p>
-                        <p>通过Chocolatey自动安装:</p>
+                        <p>一键下载最高画质:</p>
                         <ul>
-                            <li>BBDown下载器</li>
-                            <li>FFmpeg编码器</li>
+                            <li>自动选择最佳画质</li>
+                            <li>默认下载弹幕和封面</li>
+                            <li>多线程加速</li>
                         </ul>
                     </div>
                 </div>
                 <div class="feature-item">
-                    <h3 class="feature-title">交互式下载界面</h3>
+                    <h3 class="feature-title">高级模式</h3>
                     <div class="feature-content">
-                        <p>提供两种操作模式:</p>
+                        <p>完全自定义下载:</p>
                         <ul>
-                            <li>快速下载模式</li>
-                            <li>高级下载模式</li>
+                            <li>选择API模式</li>
+                            <li>自定义画质优先级</li>
+                            <li>设置编码格式</li>
                         </ul>
                     </div>
                 </div>
@@ -62,20 +73,14 @@
         </section>
 
         <section class="cyber-card" data-aos="zoom-in">
-            <h2><span class="hacker-text">$</span> 使用说明</h2>
+            <h2><span class="hacker-text">$</span> 使用示例</h2>
             <div class="code-container">
-                <pre class="neon-code"><code class="language-bat">:: 安装步骤
-bbdownInstall.bat
-:: 运行方式
-bdown.bat</code></pre>
+                <pre class="neon-code"><code class="language-bat">:: 快速下载模式
+bdown.bat "https://www.bilibili.com/video/BV1xx..."
+
+:: 高级下载模式
+bdown.bat "BV1xx..." --use-tv-api --dfn-priority "杜比视界,HDR" --encoding-priority "hevc"</code></pre>
                 <div class="scanline"></div>
-            </div>
-            <div class="install-steps">
-                <h3>安装步骤</h3>
-                <ol>
-                    <li>双击运行 <code>bbdownInstall.bat</code></li>
-                    <li>系统将自动完成环境配置</li>
-                </ol>
             </div>
         </section>
     </div>

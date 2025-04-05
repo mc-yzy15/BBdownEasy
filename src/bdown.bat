@@ -3,60 +3,24 @@ setlocal enabledelayedexpansion
 
 :: 自动检查并创建目录
 if not exist "J:\video\Bili Downloads" (
-    mkdir "J:\video\Bili Downloads"
-    if errorlevel 1 (
+    mkdir "J:\video\Bili Downloads" || (
         echo 无法创建目录 J:\video\Bili Downloads
         pause
         exit /b 1
     )
 )
+
 cd /d "J:\video\Bili Downloads"
 
-:: 环境检查函数
-:check_environment
-where BBDown >nul 2>&1
-if %ERRORLEVEL% neq 0 (
-    echo 未检测到BBDown，请手动下载并安装
-    echo 下载地址: https://github.com/nilaoda/BBDown/releases
-    echo 下载后请将BBDown.exe放入系统PATH目录或本程序目录
+:: 简化环境检查
+where BBDown >nul 2>&1 || (
+    echo 错误: 未找到BBDown
+    echo 请确保BBDown.exe位于PATH或当前目录
     pause
     exit /b 1
 )
 
-:: 自动更新检查
-:check_update
-echo 正在检查BBDown更新...
-for /f "tokens=*" %%i in ('BBDown --version') do set current_version=%%i
-powershell -Command "(Invoke-WebRequest -Uri 'https://api.github.com/repos/nilaoda/BBDown/releases/latest' -UseBasicParsing).Content" > temp.json
-for /f "tokens=*" %%i in ('type temp.json ^| findstr "tag_name"') do (
-    set "latest_version=%%i"
-    set "latest_version=!latest_version:*tag_name: =!"
-    set "latest_version=!latest_version:~1,-2!"
-)
-del temp.json
-
-if not "!current_version!"=="!latest_version!" (
-    echo 发现新版本: !latest_version!
-    echo 请手动下载更新: https://github.com/nilaoda/BBDown/releases
-    echo 当前版本: !current_version!
-    pause
-)
-
-:: 原有代码保持不变
-if "%~1"=="" (
-    echo 错误: 必须提供视频URL或命令
-    echo.
-    BBDown --help
-    pause
-    exit /b 1
-)
-
-:: 执行下载
-BBDown %*
-
-:: 记录日志
-echo [%date% %time%] 执行命令: BBDown %* >> bdown.log
-
+:: 直接进入主菜单
 :main_menu
 cls
 echo.
@@ -81,7 +45,6 @@ cls
 echo.
 echo === 快速下载模式 ===
 echo 提示：可直接拖放视频链接到本窗口
-echo 问题反馈: https://github.com/nilaoda/BBDown/issues
 echo.
 set /p url=请输入视频URL（输入q返回）:
 if /i "%url%"=="q" goto main_menu
@@ -92,7 +55,7 @@ if "%url%"=="" (
 )
 
 echo 正在下载...
-BBDown "%url%" -mt --force-http --download-danmaku --cover
+BBDown "%url%"
 goto download_complete
 
 :advanced_download
@@ -166,11 +129,9 @@ cls
 echo.
 echo === 画质设置 ===
 echo 1. 自动选择最佳画质
-echo 2. 交互式选择画质
-echo 3. 自定义画质优先级
-echo 4. 自定义编码优先级
+echo 2. 在下载时交互式选择画质
 echo.
-set /p quality_choice=请选择 [1-4]:
+set /p quality_choice=请选择 [1-2]:
 if "%quality_choice%"=="1" (
     set quality=
     set encoding=
@@ -178,17 +139,6 @@ if "%quality_choice%"=="1" (
 if "%quality_choice%"=="2" (
     set quality=--interactive
     goto param_menu
-)
-if "%quality_choice%"=="3" (
-    echo 示例: "8K 超高清, 1080P 高码率, HDR 真彩, 杜比视界"
-    set /p quality=请输入画质优先级:
-    set quality=--dfn-priority "%quality%"
-    goto param_menu
-)
-if "%quality_choice%"=="4" (
-    echo 示例: "hevc,av1,avc"
-    set /p encoding=请输入编码优先级:
-    set encoding=--encoding-priority "%encoding%"
 )
 goto param_menu
 
@@ -272,7 +222,6 @@ if %ERRORLEVEL% equ 0 (
     echo [%date% %time%] %url% >> download_history.log
 ) else (
     echo [错误] 下载失败！代码: %ERRORLEVEL%
-    echo 请查看: https://github.com/nilaoda/BBDown/issues
 )
 pause
 goto main_menu
@@ -285,7 +234,8 @@ echo 1. WEB账号登录
 echo 2. TV账号登录
 echo 3. 返回主菜单
 echo.
-set /p login_choice=请选择 [1-3]:
+set /p login_choice=请选择登录方式 [1-3]: 
+
 if "%login_choice%"=="1" (
     BBDown login
     pause
@@ -301,8 +251,123 @@ goto login_menu
 
 :show_help
 cls
-BBDown --help
 echo.
-echo 更多帮助请访问: https://github.com/nilaoda/BBDown/issues
+echo === BBDown 帮助文档 ===
+echo 版本: 1.6.3
+echo Bilibili 下载/解析工具
+echo.
+echo 遇到问题请首先查阅:
+echo https://github.com/nilaoda/BBDown/issues
+echo.
+echo 基本用法:
+echo   bbdown.exe <视频URL> [选项]
+echo.
+echo 常用选项:
+echo   -tv       使用TV端解析模式
+echo   -app      使用APP端解析模式
+echo   -intl     使用国际版解析模式
+echo   -mt       多线程下载(默认开启)
+echo   -dd       下载弹幕
+echo   -info     仅解析不下载
+echo   -aria2    使用aria2c下载
+echo   -F        自定义文件名格式
+echo.
+echo 所有选项：
+echo BBDown version 1.6.3, Bilibili Downloader.
+echo 遇到问题请首先到以下地址查阅有无相关信息：
+echo https://github.com/nilaoda/BBDown/issues
+echo.
+echo Description:
+echo BBDown是一个免费且便捷高效的哔哩哔哩下载/解析软件.
+echo.
+echo Usage:
+echo  bbdown <url> [command] [options]
+echo.
+echo Arguments:
+echo  <url>  视频地址 或 av|bv|BV|ep|ss
+echo.
+echo Options:
+echo  -tv, --use-tv-api                              使用TV端解析模式
+echo  -app, --use-app-api                            使用APP端解析模式
+echo  -intl, --use-intl-api                          使用国际版(东南亚视频)解析模式
+echo  --use-mp4box                                   使用MP4Box来混流
+echo  -e, --encoding-priority <encoding-priority>    视频编码的选择优先级, 用逗号分割 例: "hevc,av1,avc"
+echo  -q, --dfn-priority <dfn-priority>              画质优先级,用逗号分隔 例: "8K 超高清, 1080P 高码率, HDR 真彩, 杜比视界"
+echo  -info, --only-show-info                        仅解析而不进行下载
+echo  --show-all                                     展示所有分P标题
+echo  -aria2, --use-aria2c                           调用aria2c进行下载(你需要自行准备好二进制可执行文件)
+echo  -ia, --interactive                             交互式选择清晰度
+echo  -hs, --hide-streams                            不要显示所有可用音视频流
+echo  -mt, --multi-thread                            使用多线程下载(默认开启)
+echo  --video-only                                   仅下载视频
+echo  --audio-only                                   仅下载音频
+echo  --danmaku-only                                 仅下载弹幕
+echo  --sub-only                                     仅下载字幕
+echo  --cover-only                                   仅下载封面
+echo  --debug                                        输出调试日志
+echo  --skip-mux                                     跳过混流步骤
+echo  --skip-subtitle                                跳过字幕下载
+echo  --skip-cover                                   跳过封面下载
+echo  --force-http                                   下载音视频时强制使用HTTP协议替换HTTPS(默认开启)
+echo  -dd, --download-danmaku                        下载弹幕
+echo  --skip-ai                                      跳过AI字幕下载(默认开启)
+echo  --video-ascending                              视频升序(最小体积优先)
+echo  --audio-ascending                              音频升序(最小体积优先)
+echo  --allow-pcdn                                   不替换PCDN域名, 仅在正常情况与--upos-host均无法下载时使用
+echo  -F, --file-pattern <file-pattern>              使用内置变量自定义单P存储文件名:
+echo.
+echo                                                 <videoTitle>: 视频主标题
+echo                                                 <pageNumber>: 视频分P序号
+echo                                                 <pageNumberWithZero>: 视频分P序号(前缀补零)
+echo                                                 <pageTitle>: 视频分P标题
+echo                                                 <bvid>: 视频BV号
+echo                                                 <aid>: 视频aid
+echo                                                 <cid>: 视频cid
+echo                                                 <dfn>: 视频清晰度
+echo                                                 <res>: 视频分辨率
+echo                                                 <fps>: 视频帧率
+echo                                                 <videoCodecs>: 视频编码
+echo                                                 <videoBandwidth>: 视频码率
+echo                                                 <audioCodecs>: 音频编码
+echo                                                 <audioBandwidth>: 音频码率
+echo                                                 <ownerName>: 上传者名称
+echo                                                 <ownerMid>: 上传者mid
+echo                                                 <publishDate>: 收藏夹/番剧/合集发布时间
+echo                                                 <videoDate>: 视频发布时间(分p视频发布时间与<publishDate>相同)
+echo                                                 <apiType>: API类型(TV/APP/INTL/WEB)
+echo.
+echo                                                 默认为: <videoTitle>
+echo  -M, --multi-file-pattern <multi-file-pattern>  使用内置变量自定义多P存储文件名:
+echo.
+echo                                                 默认为: <videoTitle>/[P<pageNumberWithZero>]<pageTitle>
+echo  -p, --select-page <select-page>                选择指定分p或分p范围: (-p 8 或 -p 1,2 或 -p 3-5 或 -p ALL 或 -p LAST 或 -p
+echo                                                 3,5,LATEST)
+echo  --language <language>                          设置混流的音频语言(代码), 如chi, jpn等
+echo  -ua, --user-agent <user-agent>                 指定user-agent, 否则使用随机user-agent
+echo  -c, --cookie <cookie>                          设置字符串cookie用以下载网页接口的会员内容
+echo  -token, --access-token <access-token>          设置access_token用以下载TV/APP接口的会员内容
+echo  --aria2c-args <aria2c-args>                    调用aria2c的附加参数(默认参数包含"-x16 -s16 -j16 -k 5M", 使用时注意字符串转义)
+echo  --work-dir <work-dir>                          设置程序的工作目录
+echo  --ffmpeg-path <ffmpeg-path>                    设置ffmpeg的路径
+echo  --mp4box-path <mp4box-path>                    设置mp4box的路径
+echo  --aria2c-path <aria2c-path>                    设置aria2c的路径
+echo  --upos-host <upos-host>                        自定义upos服务器
+echo  --force-replace-host                           强制替换下载服务器host(默认开启)
+echo  --save-archives-to-file                        将下载过的视频记录到本地文件中, 用于后续跳过下载同个视频
+echo  --delay-per-page <delay-per-page>              设置下载合集分P之间的下载间隔时间(单位: 秒, 默认无间隔)
+echo  --host <host>                                  指定BiliPlus host(使用BiliPlus需要access_token, 不需要cookie,
+echo                                                 解析服务器能够获取你账号的大部分权限!)
+echo  --ep-host <ep-host>                            指定BiliPlus EP host(用于代理api.bilibili.com/pgc/view/web/season,
+echo                                                 大部分解析服务器不支持代理该接口)
+echo  --area <area>                                  (hk|tw|th) 使用BiliPlus时必选, 指定BiliPlus area
+echo  --config-file <config-file>                    读取指定的BBDown本地配置文件(默认为: BBDown.config)
+echo  --version                                      Show version information
+echo  -?, -h, --help                                 Show help and usage information
+echo.
+echo Commands:
+echo  login    通过APP扫描二维码以登录您的WEB账号
+echo  logintv  通过APP扫描二维码以登录您的TV账号
+echo  serve    以服务器模式运行
+echo.
 pause
 goto main_menu
