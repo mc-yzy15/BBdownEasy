@@ -1,4 +1,4 @@
-/* 基础样式 */
+/* 基础样式 - 赛博朋克主题 */
 body {
     margin: 0;
     padding: 0;
@@ -14,149 +14,36 @@ canvas#particles {
     top: 0;
     left: 0;
     z-index: -1;
+    width: 100%;
+    height: 100%;
 }
 
-/* 头部样式 */
-.cyber-header {
-    text-align: center;
-    padding: 2rem 0;
-    margin-bottom: 2rem;
-}
-
+/* 霓虹文字效果 */
 .neon-text {
-    font-size: 3.5rem;
-    text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d, 0 0 30px #00ff9d;
+    font-size: clamp(2rem, 8vw, 4rem);
+    text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d;
     animation: neonGlow 1.5s ease-in-out infinite alternate;
 }
 
-.blink {
-    animation: blink 1s step-end infinite;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: #00b4ff;
-    margin-top: 0.5rem;
-}
-
-/* 卡片容器 */
-.cyber-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-/* 卡片样式 */
-.cyber-card {
-    background: rgba(10, 20, 40, 0.7);
-    border: 1px solid #00ff9d;
-    border-radius: 5px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.hologram {
-    background: linear-gradient(135deg, rgba(10, 20, 40, 0.7), rgba(0, 180, 255, 0.1));
-    border-color: #00b4ff;
-}
-
-.hacker-text {
-    color: #ff00aa;
-    text-shadow: 0 0 5px #ff00aa;
-}
-
-/* 网格布局 */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.cyber-box {
-    background: rgba(0, 20, 40, 0.5);
-    border: 1px solid #00b4ff;
-    padding: 1.5rem;
-    border-radius: 5px;
-    position: relative;
-    transition: all 0.3s ease;
-}
-
-.hexagon {
-    width: 50px;
-    height: 30px;
-    background: #00ff9d;
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.hexagon:before, .hexagon:after {
-    content: "";
-    position: absolute;
-    width: 0;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-}
-
-.hexagon:before {
-    bottom: 100%;
-    border-bottom: 15px solid #00ff9d;
-}
-
-.hexagon:after {
-    top: 100%;
-    border-top: 15px solid #00ff9d;
-}
-
-.glow {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at center, rgba(0, 255, 157, 0.1), transparent 70%);
-    animation: pulse 2s infinite;
-}
-
-/* 代码容器 */
-.code-container {
-    position: relative;
-    background: #011627;
-    border: 1px solid #00ff9d;
-    border-radius: 5px;
-    padding: 1rem;
-    font-family: 'Courier New', monospace;
-    overflow: hidden;
-}
-
-.neon-code {
-    margin: 0;
-    color: #00ff9d;
-    font-size: 1.1rem;
-}
-
-.scanline {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, 
-        rgba(0, 255, 157, 0.1) 0%, 
-        rgba(0, 255, 157, 0) 10%);
-    animation: scan 8s linear infinite;
+/* 响应式布局 */
+@media (max-width: 768px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    .link-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 终端样式 */
 .cyber-terminal {
     max-width: 800px;
-    margin: 3rem auto;
+    margin: 2rem auto;
     background: rgba(0, 10, 20, 0.8);
     border: 1px solid #00ff9d;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
 }
 
 .terminal-header {
