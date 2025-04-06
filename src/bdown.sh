@@ -559,3 +559,11 @@ show_help() {
     echo
     echo "常见问题与反馈:"
     echo "https://github.com/nilaoda/BBDown/issues"
+    echo
+    echo "按下q键返回主菜单..."
+    
+    case $login_choice in
+        q) 
+            main_menu
+    esac
+}
