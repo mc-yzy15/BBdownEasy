@@ -41,11 +41,37 @@
 ### 安装步骤
 1. 双击运行 `bbdownInstall.bat`（需管理员权限）
 2. 系统将自动：
-   - 创建下载目录 `J:\video\Bili Downloads`
+   - 创建下载目录 `C:\BiliDownloads`
    - 安装Chocolatey包管理器
    - 下载BBDown及FFmpeg
    - 完成环境配置
 
 ### 运行方式
-1. 双击运行 `bdown.bat` 进入主界面
+1. 双击运行 `BBdownEasy.bat` 进入主界面
 2. 或通过命令行直接下载：
+
+#### 快速下载模式
+- 输入视频URL后，系统将自动选择最佳画质并下载。
+- 默认下载弹幕和封面。
+
+#### 高级下载模式
+- 提供以下参数设置：
+  - **API模式**：选择Web/TV/APP/国际版API
+  - **画质优先级**：手动指定画质顺序
+  - **编码优先级**：指定HEVC/AV1等编码格式
+  - **下载内容**：选择是否下载弹幕、封面、字幕等
+  - **保存路径**：自定义下载目录
+  - **分P选择**：选择特定分P下载
+  - **高级选项**：启用调试模式、跳过混流等
+
+---
+
+## 参数说明
+- `--use-tv-api`：使用TV端API
+- `--use-app-api`：使用APP端API
+- `--use-intl-api`：使用国际版API
+- `--multi-thread`：启用多线程下载
+- `--download-danmaku`：下载弹幕
+- `--cover`：下载封面
+- `--only-show-info`：仅显示视频信息
+- `--select-page`：选择特定分P下载

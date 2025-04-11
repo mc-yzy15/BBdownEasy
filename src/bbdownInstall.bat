@@ -3,8 +3,8 @@ setlocal enabledelayedexpansion
 
 :: 初始化设置
 title BBDown 简易版 - 带自动安装功能
-if not exist "J:\video\Bili Downloads" mkdir "J:\video\Bili Downloads"
-cd /d "J:\video\Bili Downloads"
+if not exist "C:\BiliDownloads" mkdir "C:\BiliDownloads"
+cd /d "C:\BiliDownloads"
 
 :: 自动安装函数
 :auto_install
@@ -59,19 +59,6 @@ if not "!current_ver!"=="!latest_ver!" (
         goto manual_update
     )
 )
-
-:: 原有功能
-if "%~1"=="" (
-    echo.
-    echo 使用方法: bdowneasy [视频URL]
-    echo 示例: bdowneasy "https://www.bilibili.com/video/BV1xx411c7H2"
-    echo.
-    BBDown --help
-    pause
-    exit /b 1
-)
-
-BBDown %*
 
 :: 记录日志
 echo [%date% %time%] !cmd! >> bdown.log

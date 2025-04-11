@@ -63,9 +63,12 @@
                     <div class="feature-content">
                         <p>完全自定义下载:</p>
                         <ul>
-                            <li>选择API模式</li>
+                            <li>选择API模式（Web/TV/APP/国际版）</li>
                             <li>自定义画质优先级</li>
-                            <li>设置编码格式</li>
+                            <li>设置编码格式（HEVC/AV1等）</li>
+                            <li>选择是否下载弹幕、封面、字幕</li>
+                            <li>自定义保存路径</li>
+                            <li>分P选择下载</li>
                         </ul>
                     </div>
                 </div>
@@ -78,57 +81,63 @@
                 <div class="step-item">
                     <h3 class="step-title">1. 下载安装</h3>
                     <p>从GitHub下载最新版本，解压后运行bbdownInstall.bat(或者bbdownInstall.sh)</p>
-                    </div>
+                </div>
                 <div class="step-item">
                     <h3 class="step-title">2. 使用</h3>
                     <p>运行BBdownEasy.bat(或者BBdownEasy.sh)，根据提示完成配置</p>
-    </div>
-
-    <!-- 新增下载和链接区域 -->
-    <section class="cyber-card download-section" data-aos="zoom-in">
-        <h2><span class="hacker-text">↓</span> 下载与链接</h2>
-        <div class="link-grid">
-            <a href="https://github.com/Yzy15/BBdownEasy/releases/latest" class="cyber-link" target="_blank">
-                <div class="link-icon">⬇️</div>
-                <div class="link-content">
-                    <h3>最新发布</h3>
-                    <p>获取最新稳定版本</p>
+                    <ul>
+                        <li>快速下载模式：输入视频URL即可</li>
+                        <li>高级下载模式：支持自定义API模式、画质优先级、编码格式等</li>
+                    </ul>
                 </div>
-                <div class="link-glow"></div>
-            </a>
-            <a href="https://github.com/Yzy15/BBdownEasy" class="cyber-link" target="_blank">
-                <div class="link-icon">💻</div>
-                <div class="link-content">
-                    <h3>GitHub项目</h3>
-                    <p>查看源代码和文档</p>
-                </div>
-                <div class="link-glow"></div>
-            </a>
-        </div>
-    </section>
-
-    <!-- 页脚部分 -->
-    <footer class="cyber-footer">
-        <p>Powered By <span class="powered-by">BBDown</span> 
-        <span class="powered-by">GitHub</span> 
-        <span class="powered-by">Bash</span> 
-        <span class="powered-by">Batch</span>
-        <span class="powered-by">HTML5</span>
-        <span class="powered-by">CSS3</span></p>
-    </footer>
-
-    <div class="cyber-terminal">
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <span class="red"></span>
-                <span class="yellow"></span>
-                <span class="green"></span>
             </div>
-            <span class="terminal-title">BBdownEasy@v1.0.0 ~</span>
-        </div>
-        <div class="terminal-content" id="terminal"></div>
-    </div>
+        </section>
 
-    <script src="script.js"></script>
-</body>
+        <!-- 新增下载和链接区域 -->
+        <section class="cyber-card download-section" data-aos="zoom-in">
+            <h2><span class="hacker-text">↓</span> 下载与链接</h2>
+            <div class="link-grid">
+                <a href="https://github.com/Yzy15/BBdownEasy/releases/latest" class="cyber-link" target="_blank">
+                    <div class="link-icon">⬇️</div>
+                    <div class="link-content">
+                        <h3>最新发布</h3>
+                        <p>获取最新稳定版本</p>
+                    </div>
+                    <div class="link-glow"></div>
+                </a>
+                <a href="https://github.com/Yzy15/BBdownEasy" class="cyber-link" target="_blank">
+                    <div class="link-icon">💻</div>
+                    <div class="link-content">
+                        <h3>GitHub项目</h3>
+                        <p>查看源代码和文档</p>
+                    </div>
+                    <div class="link-glow"></div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 页脚部分 -->
+        <footer class="cyber-footer">
+            <p>Powered By <span class="powered-by">BBDown</span> 
+            <span class="powered-by">GitHub</span> 
+            <span class="powered-by">Bash</span> 
+            <span class="powered-by">Batch</span>
+            <span class="powered-by">HTML5</span>
+            <span class="powered-by">CSS3</span></p>
+        </footer>
+
+        <div class="cyber-terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="red"></span>
+                    <span class="yellow"></span>
+                    <span class="green"></span>
+                </div>
+                <span class="terminal-title">BBdownEasy@v1.0.0 ~</span>
+            </div>
+            <div class="terminal-content" id="terminal"></div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
 </html>
