@@ -15,7 +15,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.1.1
       with:
-        ref: dev  # 确保分支存在，否则改为 main
+        ref: Dev  # 确保分支存在，否则改为 main
 
     - name: Debug Git Status
       run: |
