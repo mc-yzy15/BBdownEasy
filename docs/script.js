@@ -9,30 +9,26 @@ function initParticles() {
     const particleCount = Math.floor(window.innerWidth / 10);
 
     // 粒子类
+    // 增强粒子效果
     class Particle {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 2 + 1;
-            this.speedX = Math.random() * 3 - 1.5;
-            this.speedY = Math.random() * 3 - 1.5;
-            this.color = `hsl(${Math.random() * 60 + 150}, 100%, 50%)`;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 4 - 2;
+            this.speedY = Math.random() * 4 - 2;
+            this.color = `hsla(${Math.random() * 60 + 150}, 100%, 50%, ${Math.random() * 0.5 + 0.5})`;
+            this.alpha = Math.random() * 0.6 + 0.4;
         }
-
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-
+        
+        // 添加粒子拖尾效果
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fillStyle = this.color;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = this.color;
             ctx.fill();
-            ctx.closePath();
         }
     }
 
