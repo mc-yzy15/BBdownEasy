@@ -28,18 +28,18 @@ jobs:
       with:
         node-version: '20'
 
-    - name: Get current date
-      id: date
-      run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+    - name: Get current datetime
+      id: datetime
+      run: echo "datetime=$(date +'%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
 
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: nightly-${{ steps.date.outputs.date }}
-        name: Nightly Build (${{ steps.date.outputs.date }})
+        tag_name: nightly-${{ steps.datetime.outputs.datetime }}
+        name: Nightly ${{ steps.datetime.outputs.datetime }}
         body: |
           ⚡ 自动构建的夜间版本
-          - 构建时间: ${{ steps.date.outputs.date }}
+          - 构建时间: ${{ steps.datetime.outputs.datetime }}
           - 源码版本: ${{ github.sha }}
         prerelease: true
         draft: false

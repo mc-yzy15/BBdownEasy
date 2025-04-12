@@ -1,4 +1,5 @@
-# BBdownEasy
+# BBDown简易版（BBdownEasy）
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 项目简介
 这是一个基于BBDown的B站视频下载工具增强版，提供以下核心功能：
