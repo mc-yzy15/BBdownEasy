@@ -24,7 +24,7 @@ where BBDown >nul 2>&1 || (
 :main_menu
 cls
 echo.
-echo ===== BBDown 下载器 v1.6.3 =====
+echo ===== BBDown 下载器 =====
 echo 1. 快速下载（默认参数）
 echo 2. 高级下载（自定义参数）
 echo 3. 账号登录功能
@@ -274,7 +274,6 @@ cls
 echo.
 echo.
 echo === BBDown 帮助文档 ===
-echo 版本: 1.6.3
 echo Bilibili 下载/解析工具
 echo.
 echo 遇到问题请首先查阅:
