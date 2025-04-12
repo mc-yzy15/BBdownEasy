@@ -1,7 +1,7 @@
 name: Manual Release
 
 on:
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,23 +13,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # 获取完整提交历史
+        fetch-depth: 0
 
     - name: Setup environment
+      id: setup
       run: |
         mkdir -p Publish/Actions
         DATE_TIME=$(date +'%Y-%m-%d_%H-%M')
+        echo "DISPLAY_DATE=${DATE_TIME//_/ }" >> $GITHUB_OUTPUT
+        echo "DATE_TIME=${DATE_TIME}" >> $GITHUB_OUTPUT
 
     - name: Package Windows files
       run: |
         cd src
-        zip "../Publish/Actions/BBdownWindows_$DATE_TIME.zip" BBdownEasy.bat bbdownInstall.bat
+        zip "../Publish/Actions/BBdownWindows_${{ steps.setup.outputs.DATE_TIME }}.zip" BBdownEasy.bat bbdownInstall.bat
         cd ..
 
     - name: Package Linux files
       run: |
         cd src
-        tar -czvf "../Publish/Actions/BBdownLinux_$DATE_TIME.tar.gz" BBdownEasy.sh bbdownInstall.sh
+        tar -czvf "../Publish/Actions/BBdownLinux_${{ steps.setup.outputs.DATE_TIME }}.tar.gz" BBdownEasy.sh bbdownInstall.sh
         cd ..
 
     - name: Get commit logs
@@ -40,13 +43,13 @@ jobs:
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: release-${{ env.DATE_TIME }}
-        name: AutoRelease ${{ env.DATE_TIME | replace('_', ' ') }}
+        tag_name: release-${{ steps.setup.outputs.DATE_TIME }}
+        name: AutoRelease ${{ steps.setup.outputs.DISPLAY_DATE }}
         body: |
           🚀 自动构建发布版本
-          - 构建时间: ${{ env.DATE_TIME | replace('_', ' ') }}
+          - 构建时间: ${{ steps.setup.outputs.DISPLAY_DATE }}
           - 最近提交记录:
           ${{ steps.changelog.outputs.logs }}
         files: |
-          Publish/Actions/BBdownWindows_${{ env.DATE_TIME }}.zip
-          Publish/Actions/BBdownLinux_${{ env.DATE_TIME }}.tar.gz
+          Publish/Actions/BBdownWindows_${{ steps.setup.outputs.DATE_TIME }}.zip
+          Publish/Actions/BBdownLinux_${{ steps.setup.outputs.DATE_TIME }}.tar.gz
