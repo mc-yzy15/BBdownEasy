@@ -6,6 +6,36 @@ body {
     background-color: #0a0a1a;
     color: #00ff9d;
     overflow-x: hidden;
+    text-align: center; /* 添加文字居中 */
+}
+
+/* 美化滚动条 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 10, 20, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #00b4ff;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ff9d;
+}
+
+/* 终端内容区域滚动条美化 */
+.terminal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+    background: rgba(0, 180, 255, 0.5);
 }
 
 /* 粒子背景 */

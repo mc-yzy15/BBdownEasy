@@ -24,7 +24,7 @@ where BBDown >nul 2>&1 || (
 :main_menu
 cls
 echo.
-echo ===== BBDown 下载器 v1.6.3 =====
+echo ===== BBDown 下载器 =====
 echo 1. 快速下载（默认参数）
 echo 2. 高级下载（自定义参数）
 echo 3. 账号登录功能
@@ -252,15 +252,36 @@ goto login_menu
 :show_help
 cls
 echo.
+echo === BBDown 帮助菜单 ===
+echo 1. 基本用法
+echo 2. 完整帮助
+echo 3. 返回主菜单
+echo.
+set /p help_choice=请选择帮助[1-3]: 
+if "%help_choice%"=="1" (
+    goto show_help1
+)
+if "%help_choice%"=="2" (
+    goto show_help2
+)
+if "%help_choice%"=="3" (
+    goto main_menu
+)
+goto show_help
+
+:show_help1
+cls
+echo.
+echo.
 echo === BBDown 帮助文档 ===
-echo 版本: 1.6.3
 echo Bilibili 下载/解析工具
 echo.
 echo 遇到问题请首先查阅:
 echo https://github.com/nilaoda/BBDown/issues
 echo.
 echo 基本用法:
-echo   bbdown.exe <视频URL> [选项]
+echo     "bbdown.exe <视频URL> [选项]"
+echo 请不带双引号输入哦！
 echo.
 echo 常用选项:
 echo   -tv       使用TV端解析模式
@@ -272,12 +293,13 @@ echo   -info     仅解析不下载
 echo   -aria2    使用aria2c下载
 echo   -F        自定义文件名格式
 echo.
-echo 所有选项：
-echo BBDown version 1.6.3, Bilibili Downloader.
-echo 遇到问题请首先到以下地址查阅有无相关信息：
-echo https://github.com/nilaoda/BBDown/issues
+pause
+goto show_help
+:show_help2
+cls
+echo.
+echo === BBDown 完整帮助 ===
 echo.
 bbdown.exe --help
-echo.
 pause
-goto main_menu
+goto show_help
