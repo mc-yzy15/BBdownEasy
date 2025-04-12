@@ -1,4 +1,4 @@
-# BBDown简易版（BBdownEasy）
+# BBdownEasy
 
 ## 项目简介
 这是一个基于BBDown的B站视频下载工具增强版，提供以下核心功能：
